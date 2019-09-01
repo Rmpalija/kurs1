@@ -72,23 +72,26 @@ function post($article) {
 
 function put($articleId, $article) {
 
-    $articles = getData();
-    $article['id'] = $articleId;
-
-    if ($articleId === null) {
-        error('Missing article Id', 400);
-    }
-
-    foreach ($articles as $key => $currentArticle) {
-        if ($currentArticle->id == $articleId) {
-            $articles[$key] = $article;
-            saveData($articles);
-            respond(false, 201);
-            break;
-        }
-    }
-
-    error('Article not found', 404);
+   /**
+    * Potrebno je prvo pokupiti sve postojece article iz "baze" (articles.json),
+    *
+    * Nakon toga potrebno je provjeriti da li je korisnik poslao ID article-a koji zeli da updatuje/promjeni
+    *
+    * Kada smo sigurni da imamo ID , potrebno je da nadjemo taj article i zamjenimo ga sa novim poslanim podacima.
+    *
+    * Pomoc :
+    * Da bi izbrisali article iz niza mozete koristit unset() metodu.
+    * npr. unset($articles[0]) - izbrisi prvi clan niza.
+    *
+    * Da bi ubacili novi clan unutar niza mozete to uraditi ovako
+    * npr. $articles[] = $updatedArticle
+    *
+    * P.S.
+    * Mozete naci dobar dio koda koji vam je potreban za ovo u metodama koje vec postoje.
+    * Takodje ako zapnete pisite na slack slobodno.
+    *
+    * May the force be with you !
+    */
 
 }
 
